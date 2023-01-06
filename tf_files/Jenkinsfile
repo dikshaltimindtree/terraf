@@ -4,17 +4,17 @@ pipeline {
     
 
     stages {
-        stage ('Terraform Init'){
+        stage ('Terraform Init tf_files'){
             steps {
                 sh "terraform init"
             }
         }
-        stage ('Terraform Plan'){
+        stage ('Terraform Plan' tf_files){
             steps {
                 sh "terraform plan" 
             }
         }
-        stage ('Terraform Apply'){
+        stage ('Terraform Apply tf_files'){
             steps {
                 sh "terraform apply --auto-approve"
             }
