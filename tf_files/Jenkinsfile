@@ -6,17 +6,17 @@ pipeline {
     stages {
         stage ('Terraform Init'){
             steps {
-                sh "terraform init"
+                sh "terraform -chdir=tf-files init"
             }
         }
         stage ('Terraform Plan'){
             steps {
-                sh "terraform plan -chdir tf_files" 
+                sh "terraform -chdir=tf-files plan" 
             }
         }
         stage ('Terraform Apply'){
             steps {
-                sh "terraform apply -chdir tf_files --auto-approve"
+                sh "terraform -chdir=tf-files apply --auto-approve"
             }
         }
 
@@ -31,7 +31,7 @@ pipeline {
         }
         stage ('Terraform Destroy'){
             steps {
-                sh "terraform apply -auto-approve"
+                sh "terraform -chdir=tf-files destroy -auto-approve"
             }
         }
     }
