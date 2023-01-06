@@ -13,11 +13,13 @@ pipeline {
         }
         stage ('Terraform Plan'){
             steps {
+	    	sh "cd tf_files && ls -all"
                 sh "terraform plan" 
             }
         }
         stage ('Terraform Apply'){
             steps {
+	    	sh "cd tf_files"
                 sh "terraform apply --auto-approve"
             }
         }
@@ -33,6 +35,7 @@ pipeline {
         }
         stage ('Terraform Destroy'){
             steps {
+	    	sh "cd tf_files"
                 sh "terraform destroy --auto-approve"
             }
         }
