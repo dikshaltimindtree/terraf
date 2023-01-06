@@ -4,19 +4,19 @@ pipeline {
     
 
     stages {
-        stage ('Terraform Init tf_files'){
+        stage ('Terraform Init'){
             steps {
-                sh "terraform init"
+                sh "terraform init -chdir tf_files"
             }
         }
         stage ('Terraform Plan'){
             steps {
-                sh "terraform plan tf_files" 
+                sh "terraform plan -chdir tf_files" 
             }
         }
         stage ('Terraform Apply'){
             steps {
-                sh "terraform apply tf_files --auto-approve"
+                sh "terraform apply -chdir tf_files --auto-approve"
             }
         }
 
