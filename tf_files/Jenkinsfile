@@ -8,13 +8,13 @@ pipeline {
             steps {
 	    	sh "ls -all"
 	    	sh "cd tf_files && ls -all"
-                sh "terraform init"
+                sh "cd tf_files && terraform init"
             }
         }
         stage ('Terraform Plan'){
             steps {
 	    	sh "cd tf_files && ls -all"
-                sh "terraform plan" 
+                sh "cd tf_files && terraform plan" 
             }
         }
         stage ('Terraform Apply'){
