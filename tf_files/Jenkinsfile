@@ -6,17 +6,19 @@ pipeline {
     stages {
         stage ('Terraform Init'){
             steps {
-                sh "terraform -chdir=tf-files init"
+	    	sh "ls -all"
+	    	sh "cd tf_files && ls -all"
+                sh "terraform init"
             }
         }
         stage ('Terraform Plan'){
             steps {
-                sh "terraform -chdir=tf-files plan" 
+                sh "terraform plan" 
             }
         }
         stage ('Terraform Apply'){
             steps {
-                sh "terraform -chdir=tf-files apply --auto-approve"
+                sh "terraform apply --auto-approve"
             }
         }
 
@@ -24,14 +26,14 @@ pipeline {
             steps {
                 script {
                     timeout(time: 4, unit: 'MINUTES') {
-                        input(id: "TF Apply", message: "DO you want to destroy created Resources?", ok: 'Destroy')
+                        input(id: "TF Destroy", message: "DO you want to destroy created Resources?", ok: 'Destroy')
                     }
                 }
             }
         }
         stage ('Terraform Destroy'){
             steps {
-                sh "terraform -chdir=tf-files destroy -auto-approve"
+                sh "terraform destroy --auto-approve"
             }
         }
     }
